@@ -45,6 +45,10 @@ io = IOBuffer();
 
     @test beaovdf.Df == [48,1,1,1,45,42,90]
     @test beaovdf[!, "Sum Sq"] ≈ [6256819.0,11108,2181,219450,5923740,1151444,7408263 ] atol=1
+
+
+    @test_nowarn res = SASLMR.rantest(@formula(CMAX ~  PRD + TRT + SEQ + SUBJ&SEQ), bedf, "SUBJ"; type = 1)
+    @test_nowarn res = SASLMR.rantest(@formula(CMAX ~  PRD + TRT + SEQ + SUBJ), bedf, "SUBJ"; type = 1)
 end
 
 

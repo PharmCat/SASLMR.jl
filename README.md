@@ -54,7 +54,10 @@ beaov = SASLMR.aov3(@formula(CMAX ~  PRD + TRT + SEQ + SUBJ&SEQ), bedf; beta=tru
 
 * residual
 
-For more details see: https://cran.r-project.org/web/packages/sasLM/sasLM.pdf
+For more details see: 
 
+https://cran.r-project.org/web/packages/sasLM/sasLM.pdf
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7781810/
 
 SASLMR.jl not cover all `sasLM` functionality... so... wellcome any PR for extending.
