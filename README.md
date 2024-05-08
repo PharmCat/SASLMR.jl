@@ -2,6 +2,11 @@
 
 This program comes with absolutely no warranty. No liability is accepted for any loss and risk to public health resulting from use of this software.
 
+
+[![Latest docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://pharmcat.github.io/SASLMR.jl/dev/)
+
+[![Stable docs](https://img.shields.io/badge/docs-stable-blue.svg)](https://pharmcat.github.io/SASLMR.jl/stable/)|
+
 SASLMR.jl is Julia package, it wrapp `sasLM` package for R project for ANOVA type I/II/III.
 
 Install:
