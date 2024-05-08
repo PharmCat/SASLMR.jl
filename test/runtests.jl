@@ -49,6 +49,10 @@ io = IOBuffer();
 
     @test_nowarn res = SASLMR.rantest(@formula(CMAX ~  PRD + TRT + SEQ + SUBJ&SEQ), bedf, "SUBJ"; type = 1)
     @test_nowarn res = SASLMR.rantest(@formula(CMAX ~  PRD + TRT + SEQ + SUBJ), bedf, "SUBJ"; type = 1)
+
+    res = SASLMR.ciest(@formula(CMAX ~  PRD + TRT + SEQ + SUBJ&SEQ), bedf, "TRT", [-1, 1]; level = 0.9)
+    @test collect(res) ≈ collect((-49.46976557121776, 69.40185666852565)) atol=1e-6
+    res = DataFrame(SASLMR.ciest(@formula(CMAX ~  PRD + TRT + SEQ + SUBJ&SEQ), bedf, "TRT", [-1, 1]; level = 0.9, est = true))
+    @test  res[1, "Lower CL"] ≈ -49.46976557121776 atol=1e-6
+    @test  res[1, "Upper CL"] ≈  69.40185666852565 atol=1e-6
 end
-
-

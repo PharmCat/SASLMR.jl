@@ -6,7 +6,7 @@ import Base: show
 
 import StatsBase: coeftable
 
-export aov1, aov2, aov3, aov, coeftable
+export aov1, aov2, aov3, aov, coeftable, ciest, rantest
 
 function __init__()
     if !rcopy(R"'sasLM' %in% installed.packages()")
@@ -195,6 +195,33 @@ struct RTRes
 end
 
 # CIest(CMAX~PRD + TRT + SEQ + SUBJ:SEQ, BEdata, "TRT",c(-1, 1), 0.1)
+"""
+    ciest(f, d, term, contrast; level = 0.95, est = false)
+
+
+If `est` == true - return estimate table.
+
+```
+CIest(Formula, Data, Term, Contrast, conf.level=0.95)
+```
+
+Get point estimate and its confidence interval with given contrast and alpha value using t distribution.
+
+"""
+function ciest(f, d, term::AbstractString, contrast::AbstractVector; level::Float64 = 0.95, est = false)
+    @rput f
+    @rput d
+    @rput term
+    @rput contrast
+    @rput level
+
+    result = rcopy(R"CIest(f, d, term, contrast,  conf.level=level)")
+
+    if est 
+        return CoefTable(result, ["Estimate", "Lower CL", "Upper CL", "Std. Error", "t value", "Df", "Pr(>|t|)"], [""], 7, 5)
+    end
+    (result[1,2], result[1,3])
+end
 
 # rt = RanTest(CMAX~PRD + TRT + SEQ + SUBJ:SEQ, BEdata, Random="SUBJ", Type=3, eps=1e-8)
 """
